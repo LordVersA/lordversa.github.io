@@ -96,7 +96,7 @@
             >
               Launch
             </button>
-            <video id="myVideo" preload="auto" muted autoplay>
+            <video id="myVideo" preload="auto" style="display: none" muted autoplay>
               <source src="./clip.mp4" type="video/mp4" aut />
               Your browser does not support the video tag.
             </video>
@@ -157,11 +157,9 @@
       function launchNuclear() {
         loadedField.style.display = "none";
         launchButtonField.style.display = "none";
-        document.addEventListener("DOMContentLoaded", function () {
-          var video = document.getElementById("myVideo");
-          video.style.display = "block";
-          video.play();
-        });
+        var video = document.getElementById("myVideo");
+        video.style.display = "block";
+        video.play();
       }
     </script>
   </body>
