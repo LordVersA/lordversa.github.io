@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glitch Effect on Launch</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: black; /* Make background black */
+        color: white; /* Adjust text color for visibility */
+        overflow: hidden;
+      }
+
+      .vertical-center {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .button-3d {
+        background-color: #ff4136; /* Red color */
+        border: none;
+        color: white;
+        padding: 0;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 0 8px #991f1f, 0 15px 25px rgba(0, 0, 0, 0.7);
+        transition: all 0.1s ease;
+      }
+
+      .button-3d:active {
+        box-shadow: 0 4px #991f1f;
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center vertical-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+          <div id="passwordSection" class="text-center">
+            <h3>Welcome, President</h3>
+            <p>We're honored to have you with us</p>
+            <br />
+            <p>Enter Nuclear Bombs Password</p>
+
+            <input
+              type="password"
+              id="passwordInput"
+              class="form-control mb-2"
+              placeholder="Enter password"
+            />
+            <button onclick="checkPassword()" class="btn btn-primary">Submit</button>
+          </div>
+
+          <div id="message" class="text-center mt-2 hidden" style="display: none"></div>
+          <div id="nuclearButton" class="text-center mt-2" style="display: none">
+            <code id="loadingCounter" class="text-center"></code>
+            <br />
+
+            <code id="loading" class="text-center">Aiming Target locations...</code>
+            <br />
+            <code id="loaded" class="text-center" style="opacity: 0%">Ready to launch</code>
+            <br />
+            <br />
+            <button
+              onclick="launchNuclear()"
+              id="launchButton"
+              class="button-3d mt-1"
+              style="opacity: 0%"
+              data-text="Launch"
+            >
+              Launch
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function checkPassword() {
+        var password = document.getElementById("passwordInput").value;
+        var message = document.getElementById("message");
+        var nuclearButton = document.getElementById("nuclearButton");
+        var passwordSection = document.getElementById("passwordSection");
+        var inputField = document.getElementById("passwordInput");
+        var loadingField = document.getElementById("loading");
+        var loadedField = document.getElementById("loaded");
+        var launchButtonField = document.getElementById("launchButton");
+        var loadingCounterField = document.getElementById("loadingCounter");
+        var isPulsing = false;
+        var counter = 1;
+
+        if (password === "1234") {
+          passwordSection.style.display = "none";
+          nuclearButton.style.display = "block";
+          message.style.display = "none";
+          inputField.classList.remove("incorrect");
+          loadingCounterField.innerHTML = counter;
+          var interval = setInterval(() => {
+            counter = (counter - 0.1).toFixed(1);
+            loadingCounterField.innerHTML = counter;
+            console.log(isPulsing);
+            if (counter % 2 == 0)
+              if (!isPulsing) {
+                loadingField.style.opacity = 100;
+                isPulsing = true;
+              } else {
+                loadingField.style.opacity = 100;
+                isPulsing = false;
+              }
+          }, 100);
+          setTimeout(() => {
+            clearInterval(interval);
+            loadingCounterField.style.opacity = 0;
+            loadingField.style.opacity = 0;
+            loadedField.style.opacity = 100;
+            launchButtonField.style.opacity = 100;
+          }, counter * 1000);
+        } else {
+          inputField.classList.add("incorrect");
+          message.style.display = "block";
+          message.innerHTML = "<div class='alert alert-danger'>The password is incorrect</div>";
+          nuclearButton.style.display = "none";
+        }
+      }
+
+      function launchNuclear() {
+        alert("You Just Destroy The Whole WORLD!");
+      }
+    </script>
+  </body>
+</html>
