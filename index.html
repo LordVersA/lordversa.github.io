@@ -51,12 +51,11 @@
       #myVideo {
         position: fixed; /* Use fixed or absolute positioning */
         top: 0;
-        left: 5px; /* Move video 100px to the right */
-        width: calc(100% - 5px); /* Adjust width to maintain full coverage */
+        left: 0px; /* Move video 100px to the right */
+        width: calc(100% - 0px); /* Adjust width to maintain full coverage */
         height: 100%;
         object-fit: cover; /* Ensure video covers the adjusted screen area */
         pointer-events: none; /* Makes the video untouchable */
-
       }
     </style>
   </head>
@@ -98,7 +97,7 @@
             >
               Launch
             </button>
-            <video id="myVideo" preload="auto" style="display: none" muted autoplay>
+            <video id="myVideo" preload="auto" style="display: none" playsinline muted autoplay>
               <source src="./clip.mp4" type="video/mp4" aut />
               Your browser does not support the video tag.
             </video>
