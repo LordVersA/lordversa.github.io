@@ -47,6 +47,15 @@
         box-shadow: 0 4px #991f1f;
         transform: translateY(4px);
       }
+
+      #myVideo {
+        position: fixed; /* Use fixed or absolute positioning */
+        top: 0;
+        left: 5px; /* Move video 100px to the right */
+        width: calc(100% - 5px); /* Adjust width to maintain full coverage */
+        height: 100%;
+        object-fit: cover; /* Ensure video covers the adjusted screen area */
+      }
     </style>
   </head>
   <body>
@@ -73,7 +82,7 @@
             <code id="loadingCounter" class="text-center"></code>
             <br />
 
-            <code id="loading" class="text-center">Aiming Target locations...</code>
+            <code id="loading" class="text-center">Aiming Target Locations...</code>
             <br />
             <code id="loaded" class="text-center" style="opacity: 0%">Ready to launch</code>
             <br />
@@ -87,12 +96,18 @@
             >
               Launch
             </button>
+            <video id="myVideo" preload="auto" muted autoplay>
+              <source src="./clip.mp4" type="video/mp4" aut />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
     </div>
 
     <script>
+      var loadedField = document.getElementById("loaded");
+      var launchButtonField = document.getElementById("launchButton");
       function checkPassword() {
         var password = document.getElementById("passwordInput").value;
         var message = document.getElementById("message");
@@ -100,11 +115,10 @@
         var passwordSection = document.getElementById("passwordSection");
         var inputField = document.getElementById("passwordInput");
         var loadingField = document.getElementById("loading");
-        var loadedField = document.getElementById("loaded");
-        var launchButtonField = document.getElementById("launchButton");
+
         var loadingCounterField = document.getElementById("loadingCounter");
         var isPulsing = false;
-        var counter = 25;
+        var counter = 1;
 
         if (password === "1234") {
           passwordSection.style.display = "none";
@@ -141,7 +155,13 @@
       }
 
       function launchNuclear() {
-        alert("You Just Destroy The Whole WORLD!");
+        loadedField.style.display = "none";
+        launchButtonField.style.display = "none";
+        document.addEventListener("DOMContentLoaded", function () {
+          var video = document.getElementById("myVideo");
+          video.style.display = "block";
+          video.play();
+        });
       }
     </script>
   </body>
