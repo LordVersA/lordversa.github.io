@@ -118,19 +118,19 @@
             console.log(isPulsing);
             if (counter % 2 == 0)
               if (!isPulsing) {
-                loadingField.style.opacity = 20;
+                loadingField.style.opacity = "20%";
                 isPulsing = true;
               } else {
-                loadingField.style.opacity = 100;
+                loadingField.style.opacity = "100%";
                 isPulsing = false;
               }
           }, 100);
           setTimeout(() => {
             clearInterval(interval);
-            loadingCounterField.style.opacity = 0;
-            loadingField.style.opacity = 0;
-            loadedField.style.opacity = 100;
-            launchButtonField.style.opacity = 100;
+            loadingCounterField.style.opacity = "0%";
+            loadingField.style.opacity = "0%";
+            loadedField.style.opacity = "100%";
+            launchButtonField.style.opacity = "100%";
           }, counter * 1000);
         } else {
           inputField.classList.add("incorrect");
