@@ -69,13 +69,15 @@
             <br />
             <p>Enter Password</p>
 
-            <input
-              type="password"
-              id="passwordInput"
-              class="form-control mb-2"
-              placeholder="Enter password"
-            />
-            <button onclick="checkPassword()" class="btn btn-primary">Submit</button>
+            <form id="passwordForm">
+              <input
+                type="password"
+                id="passwordInput"
+                class="form-control mb-2"
+                placeholder="Enter password"
+              />
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
 
           <div id="message" class="text-center mt-2 hidden" style="display: none"></div>
@@ -94,6 +96,7 @@
               class="button-3d mt-1"
               style="opacity: 0%"
               data-text="Launch"
+              disabled
             >
               Launch
             </button>
@@ -108,6 +111,10 @@
     <script>
       var loadedField = document.getElementById("loaded");
       var launchButtonField = document.getElementById("launchButton");
+      document.getElementById("passwordForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the form from submitting traditionally
+        checkPassword();
+      });
       function checkPassword() {
         var password = document.getElementById("passwordInput").value;
         var message = document.getElementById("message");
@@ -118,7 +125,7 @@
 
         var loadingCounterField = document.getElementById("loadingCounter");
         var isPulsing = false;
-        var counter = 22;
+        var counter = Math.floor(Math.random() * (30 - 15 + 1)) + 15;
 
         if (password === "askarzadeh") {
           passwordSection.style.display = "none";
@@ -145,6 +152,7 @@
             loadingField.style.opacity = "0%";
             loadedField.style.opacity = "100%";
             launchButtonField.style.opacity = "100%";
+            launchButtonField.disabled = false;
           }, counter * 1000);
         } else {
           inputField.classList.add("incorrect");
